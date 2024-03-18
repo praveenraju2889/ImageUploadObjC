@@ -6,8 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ContactsUI/ContactsUI.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UIDocumentPickerDelegate,CNContactPickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 
 @end
