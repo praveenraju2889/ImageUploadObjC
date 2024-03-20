@@ -7,7 +7,8 @@
 
 #import "ViewController.h"
 #import <UIKit/UIKit.h>
-
+//#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
+#import "Photos/Photos.h"
 
 @interface ViewController ()
 
@@ -54,14 +55,33 @@
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
-    NSLog(@"Selected Document info: %@", info);
+    //NSLog(@"Selected Document info: %@", info);
+    //NSString *mediaType = [info valueForKey:UIImagePickerControllerMediaType];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+
+        NSData *imgData = UIImageJPEGRepresentation(image, 1.0);
+
+        //NSString *imageString = [[NSString alloc] initWithBytes: [imgData bytes] length:[imgData length] encoding:NSUTF8StringEncoding];
+
+    NSString *base64String = [UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 1.0) base64EncodedStringWithOptions:0];
+        
+    NSLog(@"Image Data: %@", base64String);
+
+    NSURL *imagePath = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imagePath] options:nil];
+    NSString *filename = [[result firstObject] filename];
+    NSLog(@"[filename ] %@", filename );
     [self dismissViewControllerAnimated:true completion:nil];
+    
 }
+
+
 -(void)provideImageData:(void *)data bytesPerRow:(size_t)rowbytes origin:(size_t)x :(size_t)y size:(size_t)width :(size_t)height userInfo:(id)info{
     NSLog(@"Selected data info: %@", data);
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [self dismissViewControllerAnimated:true completion:nil];
     
 }
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty{

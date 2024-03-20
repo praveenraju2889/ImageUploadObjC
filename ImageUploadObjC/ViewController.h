@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import <ContactsUI/ContactsUI.h>
-
+//#import <AssetsLibrary/AssetsLibrary.h>
 @interface ViewController : UIViewController <UIDocumentPickerDelegate,CNContactPickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 
