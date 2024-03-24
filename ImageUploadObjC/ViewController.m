@@ -55,15 +55,15 @@
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
-    //NSLog(@"Selected Document info: %@", info);
+    NSLog(@"Selected Document info: %@", info);
     //NSString *mediaType = [info valueForKey:UIImagePickerControllerMediaType];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
 
         NSData *imgData = UIImageJPEGRepresentation(image, 1.0);
-
+    
         //NSString *imageString = [[NSString alloc] initWithBytes: [imgData bytes] length:[imgData length] encoding:NSUTF8StringEncoding];
 
-    NSString *base64String = [UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 1.0) base64EncodedStringWithOptions:0];
+    NSString *base64String = [imgData base64EncodedStringWithOptions:0];
         
     NSLog(@"Image Data: %@", base64String);
 
